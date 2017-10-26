@@ -1,0 +1,87 @@
+  @import url('https://fonts.googleapis.com/css?family=Indie+Flower|Montserrat');
+
+  nav {
+    background-color: #000;
+    font-weight: 300;
+    font-family: lato;
+    border-bottom: 2px solid #efefef;
+  }
+  nav a {
+    text-align: center;
+    position: relative;
+    display: inline-block;
+    padding: 20px 10px;
+    outline: none;
+    text-decoration: none !important;
+    /*text-transform: uppercase;*/
+    letter-spacing: 2px;
+    color: #ddd;
+    font-size: 14px;
+    width: 150px;
+    /*text-shadow: 0 0 1px rgba(255, 255, 255, 0.3);*/
+}
+
+.right {
+  float: right;
+}
+
+.header a:before,
+.header a:after {
+    display: inline-block;
+    opacity: 0;
+    -webkit-transition: -webkit-transform 0.3s, opacity 0.2s;
+    -moz-transition: -moz-transform 0.3s, opacity 0.2s;
+    transition: transform 0.3s, opacity 0.2s;
+}
+
+.header a:before {
+    margin-right: 5px;
+    content: '-';
+    -webkit-transform: translate(15px);
+    -moz-transform: translate(15px);
+    transform: translate(15px);
+}
+
+.header a:after {
+    margin-left: 5px;
+    content: '-';
+    -webkit-transform: translate(-15px);
+    -moz-transform: translate(-15px);
+    transform: translate(-15px);
+}
+
+.header a {
+  -webkit-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+}
+
+.header a.route--active, 
+.header a:hover {
+  font-weight: 500;
+  letter-spacing: 3px;
+  color: #64B5F6;
+/* background-color: #222; */
+  -webkit-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+}
+
+.header a:hover:before,
+.header a:hover:after{
+/* .header a:focus:before, */
+/* .header a:focus:after { */
+    opacity: 1;
+    -webkit-transform: translate(0px);
+    -moz-transform: translate(0px);
+    transform: translate(0px);
+}
+
+.header_logo {
+  color: #42A5F5;
+  /* font-family: 'Raleway', Helvetica, sans-serif; */
+  font-family: 'Indie Flower', cursive;
+  font-size: 1.8em;
+  font-weight: 900;
+  padding-left: 30px;
+  padding-right: 30px;
+  cursor: default;
+}
