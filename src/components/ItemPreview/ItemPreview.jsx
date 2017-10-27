@@ -1,6 +1,5 @@
 import React from 'react';
 import injectSheet from 'react-jss';
-import './ItemPreview.css';
 import styles from './styles';
 
 const ItemPreview = (props) => (

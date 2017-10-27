@@ -1,6 +1,8 @@
 import React from 'react';
 import { Route, Link } from 'react-router-dom';
-import './Header.css';
+import injectSheet from 'react-jss';
+// import './Header.css';
+import styles from './styles';
 
 const MenuLink = ({ label, to, activeOnlyWhenExact }) => (
   <Route
@@ -14,18 +16,13 @@ const MenuLink = ({ label, to, activeOnlyWhenExact }) => (
   />
 );
 
-export const Header = () => (
-  <nav className="header">
-    <span className="header_logo">- Aussie Go -</span>
+export const Header = (props) => (
+  <nav className={props.classes.header}>
     <MenuLink activeOnlyWhenExact to="/" label="HOME" />
     <MenuLink to="/products" label="PRODUCTS" />
     <MenuLink to="/orders" label="ORDERS" />
-    <MenuLink to="/users" label="USERS" />
-    <Link to="/other" className="right">
-      LOGIN
-    </Link>
+    <MenuLink to="/users" label="users" />
   </nav>
 );
 
-export default Header;
-
+export default injectSheet(styles)(Header);
