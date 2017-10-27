@@ -5,6 +5,7 @@ import {
 } from 'react-router-dom';
 import Home from '../Routes/Home';
 import Products from '../Routes/Products';
+import CreateNewProduct from '../Routes/CreateNewProduct';
 import Header from '../components/Header';
 
 class Layout extends Component {
@@ -22,6 +23,7 @@ class Layout extends Component {
           <Header />
           <Route exact path="/" component={Home} />
           <Route path="/products" component={Products} />
+          <Route path="/product/new" component={CreateNewProduct} />
         </div>
       </Router>
     );

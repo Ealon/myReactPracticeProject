@@ -33,7 +33,7 @@ const styles = {
   underline2: {
     height: 2,
     width: 0,
-    backgroundColor: '#42a5f5',
+    backgroundColor: '#1E88E5',
     transition: 'width ease 0.3s',
     position: 'relative',
     top,
