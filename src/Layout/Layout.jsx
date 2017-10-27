@@ -3,8 +3,8 @@ import {
   BrowserRouter as Router,
   Route,
 } from 'react-router-dom';
-import Home from '../Routes/Home/Home';
-import Products from '../Routes/Products/Products';
+import Home from '../Routes/Home';
+import Products from '../Routes/Products';
 import Header from '../components/Header';
 
 class Layout extends Component {

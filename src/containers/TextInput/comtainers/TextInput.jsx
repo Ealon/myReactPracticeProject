@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import injectSheet from 'react-jss';
 import styles from './styles';
-import hasValue from '../../global/functions';
+import hasValue from '../../../global/functions';
 
 // -----component class----------------
 class TextInput extends Component {
@@ -57,7 +57,7 @@ class TextInput extends Component {
           className={this.props.classes.input}
           placeholder={this.props.placeholder ? this.props.placeholder : `Please input ${this.props.title.toLowerCase()} ...`}
           onChange={this.onChangeHandler}
-          defaultValue={this.props.defaultValue?this.props.defaultValue:""}
+          defaultValue={this.props.defaultValue?this.props.defaultValue : ""}
           ref={node => this.input = node}
         />
         <div className={this.props.classes.underline} />

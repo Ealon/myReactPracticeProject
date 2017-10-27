@@ -1,5 +1,5 @@
 import React from 'react';
-import TextInput from '../../containers/TextInput';
+import TextInput from '../../../containers/TextInput';
 
 const Products = () => (
   <div style={{

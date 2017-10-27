@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import ItemPreview from '../../components/ItemPreview';
-import logo from '../../logo.svg';
+import ItemPreview from '../../../components/ItemPreview';
+import logo from '../../../logo.svg';
 import './Home.css';
 
 class Home extends Component {
