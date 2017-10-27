@@ -1,15 +1,14 @@
 import React from 'react';
-import TextInput from '../../../containers/TextInput';
+import ButtonLink from '../../../components/ButtonLink';
 
 const Products = () => (
   <div style={{
-    width: '90%', margin: '100px auto',
+    width: '90%', margin: '20px auto',
     }}
   >
-    <TextInput
-      title="Product Name"
-      placeholder="input something"
-    />
+    <div style={{ textAlign: 'right' }}>
+      <ButtonLink link="/products/new">+ new product</ButtonLink>
+    </div>
   </div>
 );
 
