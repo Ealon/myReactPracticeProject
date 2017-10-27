@@ -4,7 +4,7 @@ import {
   Route,
 } from 'react-router-dom';
 import Home from '../Routes/Home/Home';
-import OtherPage from '../Routes/OtherPage/OtherPage';
+import Products from '../Routes/Products/Products';
 import Header from '../components/Header';
 
 class Layout extends Component {
@@ -21,7 +21,7 @@ class Layout extends Component {
         <div>
           <Header />
           <Route exact path="/" component={Home} />
-          <Route path="/other" component={OtherPage} />
+          <Route path="/products" component={Products} />
         </div>
       </Router>
     );

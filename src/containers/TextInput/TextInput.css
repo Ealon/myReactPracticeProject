@@ -1,0 +1,50 @@
+.TextInput {
+  &-container {
+    width: 90%;
+    height: 6em;
+  }
+  &-title {
+    padding: 0 1.5em 0 0;
+    font-weight: 700;
+  }
+  &-input {
+    outline: none;
+    border: none !important;
+    font-size: 1em;
+    width: 90% !important;
+  }
+  &-underline {
+    height: 1px;
+    width: 90%;
+    background-color: #aaa;
+    position: relative;
+    top: -4px;
+    left: 0px;
+  }
+  &-underline2 {
+    height: 2px;
+    width: 0;
+    background-color: #42a5f5;
+    transition: width ease 0.3s;
+    position: relative;
+    top: -5px;
+    left: 0px;
+  }
+  &-underline-error {
+    height: 2px;
+    width: 90%;
+    background-color: #F06292;
+    transition: width ease 0.3s;
+    position: relative;
+    top: -5px;
+    left: 0px;
+  }
+  &-error {
+    color: #FF4081;
+  }
+}
+
+.TextInput-input:focus ~ .TextInput-underline2 {
+  transition: width ease 0.3s;
+  width: 90%;
+}
