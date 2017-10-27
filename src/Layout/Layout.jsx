@@ -23,7 +23,7 @@ class Layout extends Component {
           <Header />
           <Route exact path="/" component={Home} />
           <Route path="/products" component={Products} />
-          <Route exact path="/products/new" component={CreateNewProduct} />
+          <Route exact path="/product/new" component={CreateNewProduct} />
         </div>
       </Router>
     );
