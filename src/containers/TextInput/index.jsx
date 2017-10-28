@@ -1,3 +1,3 @@
-import TextInput from './comtainers/TextInput';
+import TextInput from './containers/TextInput';
 
 export default TextInput;
