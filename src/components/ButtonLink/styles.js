@@ -13,6 +13,7 @@ const styles = {
     backgroundColor: '#fff',
     transition: '.3s ease-in-out',
     cursor: 'pointer',
+    outline: 'none',
     '&:hover': {
       color: hoverColor,
       border: `solid 2px ${hoverColor}`,

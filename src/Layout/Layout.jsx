@@ -16,6 +16,13 @@ class Layout extends Component {
     };
   }
 
+  // componentDidMount() {
+  //   window.addEventListener('resize', () => {
+  //     console.log('浏览器外宽：',window.outerWidth);
+  //     console.log('浏览器内宽：',window.innerWidth);
+  //   });
+  // }
+
   render() {
     return (
       <Router>
