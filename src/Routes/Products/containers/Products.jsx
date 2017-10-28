@@ -7,7 +7,7 @@ const Products = () => (
     }}
   >
     <div style={{ textAlign: 'right' }}>
-      <ButtonLink link="/product/new">+ new product</ButtonLink>
+      <ButtonLink link="/products/new">+ new product</ButtonLink>
     </div>
   </div>
 );
