@@ -2,7 +2,7 @@ const styles = {
   header: {
     backgroundColor: '#000',
     fontWeight: 300,
-    fontFamily: 'lato',
+    fontFamily: 'lato, sans-serif',
     textAlign: 'center',
     // borderBottom: '2px solid #efefef',
     '& a': {
