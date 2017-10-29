@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import injectSheet from 'react-jss';
 import styles from './styles';
+import PropTypes from 'prop-types';
 import hasValue from '../../../global/functions';
 
 // -----component class----------------
@@ -76,6 +77,12 @@ class TextInput extends Component {
     );
   }
 }
+
+TextInput.PropTypes = {
+  title: PropTypes.string.isRequired,
+  defaultValue: PropTypes.string,
+  placeholder: PropTypes.string,
+};
 
 export default injectSheet(styles)(TextInput);
 
