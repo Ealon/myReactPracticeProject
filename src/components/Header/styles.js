@@ -1,3 +1,5 @@
+const maxWidth = 860;
+
 const styles = {
   header: {
     backgroundColor: '#000',
@@ -45,6 +47,14 @@ const styles = {
         '-webkit-transform': 'translate(0px)',
         '-moz-transform': 'translate(0px)',
         transform: 'translate(0px)',
+      },
+    },
+  },
+  [`@media (max-width: ${maxWidth}px)`]: { // important usage
+    header: {
+      '& a': {
+        fontSize: 12,
+        width: 120,
       },
     },
   },
