@@ -1,6 +1,7 @@
 import React from 'react';
 import ButtonLink from '../../../components/ButtonLink';
 import Button from '../../../components/Button';
+import Loader from '../../../components/Loader';
 
 const Products = (props) => (
   <div style={{
@@ -16,6 +17,7 @@ const Products = (props) => (
       </div>
       <Button func={props.onIncrement}>increase</Button>
     </div>
+    <Loader size={28} color='#F06292' />
   </div>
 );
 
