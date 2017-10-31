@@ -6,28 +6,23 @@ import {
 import Home from '../Routes/Home';
 import Products from '../Routes/Products';
 import CreateNewProduct from '../Routes/CreateNewProduct';
-import Header from '../components/Header';
+// import Header from '../components/Header';
+import Header2 from '../components/Header2';
+// import { smallScreen } from '../global/screenSize';
 
 class Layout extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      someState: null,
+      smallScreen: false,
     };
   }
-
-  // componentDidMount() {
-  //   window.addEventListener('resize', () => {
-  //     console.log('浏览器外宽：',window.outerWidth);
-  //     console.log('浏览器内宽：',window.innerWidth);
-  //   });
-  // }
 
   render() {
     return (
       <Router>
         <div>
-          <Header />
+          <Header2 />
           <Route exact path="/" component={Home} />
           <Route exact path="/products" component={Products} />
           <Route path="/products/new" component={CreateNewProduct} />
