@@ -101,7 +101,7 @@ export const Loader = (props) => (
 );
 /* eslint-enable */
 
-Loader.PropTypes = {
+Loader.propTypes = {
   size: PropTypes.number,
   color: PropTypes.string,
   duration: PropTypes.number,

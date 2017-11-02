@@ -4,7 +4,7 @@ import GoThreeBars from 'react-icons/lib/go/three-bars';
 import injectSheet from 'react-jss';
 // import './Header.css';
 import styles from './styles';
-import { blue1, white } from '../../global/colors';
+import { blue300, white } from '../../global/colors';
 import { smallScreen } from '../../global/screenSize';
 
 const MenuLink = ({ label, to, activeOnlyWhenExact }) => (
@@ -53,13 +53,13 @@ class Header2 extends Component {
       <div>
         <div className={this.props.classes.header} >
           <GoThreeBars
-            color={this.state.expandMenu ? blue1 : white}
+            color={this.state.expandMenu ? blue300 : white}
             size={20}
             onClick={this.toggleMenuExpand}
             style={{ padding: 5, transitionDuration: '0.2s', cursor: 'pointer' }}
           />
           <span
-            style={{ color: this.state.expandMenu ? blue1 : white, padding: 5, transitionDuration: '0.2s', fontSize: 12, cursor: 'pointer' }}
+            style={{ color: this.state.expandMenu ? blue300 : white, padding: 5, transitionDuration: '0.2s', fontSize: 12, cursor: 'pointer' }}
             onClick={this.toggleMenuExpand}  
           >
             MENU

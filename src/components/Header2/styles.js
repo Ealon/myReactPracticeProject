@@ -1,5 +1,5 @@
 import { middleScreen, smallScreen } from '../../global/screenSize';
-import { blue1 } from '../../global/colors';
+import { blue300 } from '../../global/colors';
 
 const styles = {
   header: {
@@ -46,7 +46,7 @@ const styles = {
       '&.route--active, &:hover': {
         fontWeight: 500,
         letterSpacing: 3,
-        color: blue1,
+        color: blue300,
         transitionDuration: '0.2s',
       },
       '&:hover:before, &:hover:after': {
