@@ -7,6 +7,7 @@ const styles = {
     letterSpacing: 2,
     color: '#1976D2',
     borderRadius: '20px',
+    margin: '5px 5px',
     padding: '8px 10px',
     border: 'solid 2px #1976D2',
     '-webkit-transition': '.3s ease-in-out',
