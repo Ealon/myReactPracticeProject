@@ -21,6 +21,26 @@ const styles = {
       transition: 'width ease 0.3s',
       width,
     },
+    '&::-webkit-input-placeholder':
+    { /* Chrome/Opera/Safari */
+      color: '#ccc',
+      fontWeight: 100,
+    },
+    '&::-moz-placeholder':
+    { /* Firefox 19+ */
+      color: '#ccc',
+      fontWeight: 100,
+    },
+    '&:-ms-input-placeholder':
+    { /* IE 10+ */
+      color: '#ccc',
+      fontWeight: 100,
+    },
+    '&:-moz-placeholder':
+    { /* Firefox 18- */
+      color: '#ccc',
+      fontWeight: 100,
+    },
   },
   underline: {
     height: 1,
