@@ -21,7 +21,7 @@ export const Header = (props) => (
     <MenuLink activeOnlyWhenExact to="/" label="HOME" />
     <MenuLink to="/products" label="PRODUCTS" />
     <MenuLink to="/orders" label="ORDERS" />
-    <MenuLink to="/users" label="users" />
+    <MenuLink to="/customers" label="customers" />
   </nav>
 );
 
