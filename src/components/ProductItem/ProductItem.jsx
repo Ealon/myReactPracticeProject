@@ -39,8 +39,14 @@ class ProductItem extends Component {
             className={this.props.classes.img}
             onClick={()=>this.props.openModal(this.props.url)}
           />
-          <img src={checkMark} width="24" alt="in-cart" />
         </div>
+        {
+          this.state.isItemInCart ?
+          <div className={this.props.classes.checkMarkContainer}>
+            <img src={checkMark} width="24" alt="in-cart"/>
+          </div>
+          : null
+        }
         {/* <div className={this.props.classes.itemContainer}></div> */}
           <div className={this.props.classes.chineseName}>
             {this.props.chineseName}

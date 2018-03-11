@@ -38,6 +38,14 @@ const styles = {
       color: pink300,
     },
   },
+  checkMarkContainer: {
+    width: '85%',
+    position: 'relative',
+    top: '-28px',
+    textAlign: 'right',
+    marginBottom: '-28px',
+    height: '28px',
+  },
 };
 
 export default styles;
