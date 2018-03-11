@@ -1,49 +1,53 @@
+import { blue500, pink500 } from '../../../global/colors';
+
 const width = '90%';
 const top = -1;
 
 const styles = {
   textInputContainer: {
     width,
-    height: '6em',
+    // height: '6em',
     margin: '0 auto',
   },
   title: {
     padding: '0 1.5em 0 0',
     fontWeight: 700,
+    color: '#000',
+    transition: 'width ease 0.3s',
+    position: 'relative',
+    top: '-3em',
   },
   input: {
     outline: 'none',
     border: 'none !important',
     fontSize: '1em',
     width: '90% !important',
-    padding: '5px 0 5px 1px',
+    padding: '25px 0 5px 1px',
+    '&:focus ~ $title': {
+      color: '#1E88E5',
+    },
     '&:focus ~ $underline2': {
-      transition: 'width ease 0.3s',
       width,
     },
     '&::-webkit-input-placeholder':
     { /* Chrome/Opera/Safari */
       color: '#ccc',
       fontWeight: 100,
-      fontSize: '0.85em',
     },
     '&::-moz-placeholder':
     { /* Firefox 19+ */
       color: '#ccc',
       fontWeight: 100,
-      fontSize: '0.85em',
     },
     '&:-ms-input-placeholder':
     { /* IE 10+ */
       color: '#ccc',
       fontWeight: 100,
-      fontSize: '0.85em',
     },
     '&:-moz-placeholder':
     { /* Firefox 18- */
       color: '#ccc',
       fontWeight: 100,
-      fontSize: '0.85em',
     },
   },
   underline: {
@@ -51,7 +55,7 @@ const styles = {
     width,
     backgroundColor: '#aaa',
     position: 'relative',
-    top: top + 1,
+    top: '-1em',
     left: 0,
   },
   underline2: {
@@ -60,7 +64,7 @@ const styles = {
     backgroundColor: '#1E88E5',
     transition: 'width ease 0.3s',
     position: 'relative',
-    top,
+    top: '-1em',
     left: 0,
   },
   underlineError: {
@@ -74,6 +78,7 @@ const styles = {
   },
   error: {
     color: '#FF4081',
+    padding: '3px 0 5px 0',
   },
 };
 

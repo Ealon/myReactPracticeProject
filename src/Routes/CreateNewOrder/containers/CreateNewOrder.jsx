@@ -9,7 +9,7 @@ import { blue500 } from '../../../global/colors';
 import { SERVER_PATH, PRODUCT_IMG_DIR } from '../../../global/const';
 import styles from './styles';
 
-class CreateNewProduct extends Component {
+class CreateNewOrder extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -43,7 +43,7 @@ class CreateNewProduct extends Component {
         url: PRODUCT_IMG_DIR + this.state.url,
       }
 
-      axios.post(`${SERVER_PATH}/createNewProduct`,
+      axios.post(`${SERVER_PATH}/CreateNewOrder`,
         newProductInfo
       )
       .then(function (response) {
@@ -128,5 +128,5 @@ class CreateNewProduct extends Component {
   }
 }
 
-export default injectSheet(styles)(CreateNewProduct);
+export default injectSheet(styles)(CreateNewOrder);
 
