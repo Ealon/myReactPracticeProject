@@ -36,11 +36,13 @@ export function removeItemFromCart(itemID) {
   if (localStorage && !localStorage.cartItems) {
     localStorage.setItem('cartItems', JSON.stringify([]));
   }
-  if (!isItemInCart(itemID)) {
+  if (isItemInCart(itemID)) {
     const cartItems = JSON.parse(localStorage.cartItems);
-    cartItems.push(itemID);
-    localStorage.setItem('cartItems', JSON.stringify(cartItems));
-    console.log('Added item:', itemID);
+    const cartItemsAfterDeletion = cartItems.filter((cartItem) => {
+      return cartItem !== itemID;
+    });
+    localStorage.setItem('cartItems', JSON.stringify(cartItemsAfterDeletion));
+    console.log('deleted item:', itemID);
     return true;
   }
   return false;

@@ -4,7 +4,7 @@ import TiShoppingCart from 'react-icons/lib/ti/shopping-cart';
 import injectSheet from 'react-jss';
 import { Link } from 'react-router-dom';
 import styles from './styles';
-import { addItemToCart, isItemInCart } from '../../global/functions';
+import { addItemToCart, isItemInCart, removeItemFromCart } from '../../global/functions';
 import checkMark from './check-mark.svg';
 
 class ProductItem extends Component {
@@ -25,6 +25,14 @@ class ProductItem extends Component {
     if(addItemToCart(this.props.id)) {
       this.setState({
         isItemInCart: true,
+      });
+    }
+  }
+
+  removeFromCart = () => {
+    if(removeItemFromCart(this.props.id)) {
+      this.setState({
+        isItemInCart: false,
       });
     }
   }
@@ -59,7 +67,7 @@ class ProductItem extends Component {
             <TiShoppingCart size={20} />
             {
               this.state.isItemInCart ?
-                <span>REMOVE FROM CART</span>
+                <span onClick={this.removeFromCart}>REMOVE FROM CART</span>
                 :
                 <span onClick={this.addToCart}>ADD TO CART</span>
             }
