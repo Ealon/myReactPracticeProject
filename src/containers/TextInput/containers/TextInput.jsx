@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import injectSheet from 'react-jss';
 import styles from './styles';
-import hasValue from '../../../global/functions';
+import { hasValue } from '../../../global/functions';
 
 // -----component class----------------
 class TextInput extends Component {

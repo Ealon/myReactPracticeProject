@@ -14,7 +14,6 @@ class Orders extends Component {
     super(props);
     this.state = {
       // fetching: false,
-      Orders: [],
     };
   }
 
@@ -22,11 +21,11 @@ class Orders extends Component {
   /* eslint-disable prefer-arrow-callback */
   componentWillMount() {
     const self = this;
-    axios.get(`${SERVER_PATH}/Orders`)
+    axios.get(`${SERVER_PATH}/products`)
       .then(function (response) {
         console.log(response);
         if (response.data.status === 'success') {
-          self.setState({ Orders: response.data.Orders });
+          self.setState({ products: response.data.products });
         }
       })
       .catch(function (error) {
@@ -39,7 +38,7 @@ class Orders extends Component {
     return (
       <div style={{ width: '90%', margin: '20px auto' }} >
         <div style={{ textAlign: 'right', paddingBottom: 40 }}>
-          <ButtonLink link="/orders/new">+ new product</ButtonLink>
+          <ButtonLink link="/orders/new">+ new order</ButtonLink>
         </div>
       </div>
     );

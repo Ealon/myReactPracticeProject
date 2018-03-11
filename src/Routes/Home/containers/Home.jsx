@@ -2,6 +2,62 @@ import React, { Component } from 'react';
 import ItemPreview from '../../../components/ItemPreview';
 
 class Home extends Component {
+  // componentWillMount() {
+  //   // data definition
+  //   const x = {
+  //     name: 'x',
+  //     prefer: ['a', 'b', 'c'],
+  //     engaged: false,
+  //     fiance: null,
+  //   };
+  //   const y = {
+  //     name: 'y',
+  //     prefer: ['b', 'a', 'c'],
+  //     engaged: false,
+  //     fiance: null,
+  //   };
+  //   const z = {
+  //     name: 'z',
+  //     prefer: ['a', 'b', 'c'],
+  //     engaged: false,
+  //     fiance: null,
+  //   };
+
+  //   const a = {
+  //     name: 'a',
+  //     prefer: ['y', 'x', 'z'],
+  //     engaged: false,
+  //     fiance: null,
+  //   };
+  //   const b = {
+  //     name: 'b',
+  //     prefer: ['x', 'y', 'z'],
+  //     engaged: false,
+  //     fiance: null,
+  //   };
+  //   const c = {
+  //     name: 'c',
+  //     prefer: ['x', 'y', 'z'],
+  //     engaged: false,
+  //     fiance: null,
+  //   };
+
+  //   // order definition
+  //   const men = [x, y, z];
+  //   const women = [a, b, c];
+
+  //   console.log(men.indexOf('x'));
+
+  //   this.menFirst(men);
+
+  // }
+
+  // menFirst = (men) => {
+  //   men.map(man=>{
+  //     console.log(man.prefer);
+  //   })
+  // }
+
   render() {
     return (
       <div className="Home">
