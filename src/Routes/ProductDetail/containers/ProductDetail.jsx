@@ -7,7 +7,7 @@ import ButtonLink from '../../../components/ButtonLink';
 import Button from '../../../components/Button';
 import CircleLoader from '../../../components/CircleLoader';
 import { blue500 } from '../../../global/colors';
-import { SERVER_PATH, PRODUCT_IMG_DIR } from '../../../global/const';
+import { SERVER_PATH } from '../../../global/const';
 import styles from './styles';
 
 class ProductDetail extends Component {
@@ -132,7 +132,7 @@ class ProductDetail extends Component {
       <div style={{ width: '80%', margin: '10px auto' }} >
         <div style={{ textAlign: 'center', padding: '10px 0 10px 0', borderBottom: '1px solid #ccc' }} >
           <div>Product Information</div>
-          <img src={this.state.url} height={300} />
+          <img src={this.state.url} height={300} alt=""/>
           <div>
             <span className={this.props.classes.deleteButton} onClick={this.postDeleteProduct}>
               <FaTrashO size={20} /> DELETE THIS ITEM

@@ -5,7 +5,6 @@ import ButtonLink from '../../../components/ButtonLink';
 // import Button from '../../../components/Button';
 // import Loader from '../../../components/Loader';
 // import CircleLoader from '../../../components/CircleLoader';
-import { blue700, pink400 } from '../../../global/colors';
 import { SERVER_PATH } from '../../../global/const';
 import styles from './styles';
 

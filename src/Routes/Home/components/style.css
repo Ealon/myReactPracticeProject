@@ -1,0 +1,111 @@
+.haha-face {
+  width: 200px;
+  height: 250px;
+  background-color: #F7BEAD;
+  border-radius: 8px;
+}
+
+.haha-top-hair {
+  width: 220px;
+  height: 20px;
+  background-color: #222;
+  border-radius: 9px;
+  position: relative;
+  top: -260px;
+  left: -10px;
+}
+
+.haha-left-hair {
+  width: 20px;
+  height: 80px;
+  background-color: #222;
+  border-radius: 9px;
+  position: relative;
+  top: -280px;
+  left: -10px;
+}
+
+.haha-right-hair {
+  width: 20px;
+  height: 80px;
+  background-color: #222;
+  border-radius: 9px;
+  position: relative;
+  top: -360px;
+  left: 190px;
+}
+
+.haha-glass-outer {
+  width: 120px;
+  height: 90px;
+  background-color: #112;
+  border-radius: 14px;  
+}
+
+.haha-glass-inner {
+  width: 106px;
+  height: 76px;
+  background-color: #fff;
+  border-radius: 8px;
+  position: relative;
+  top: -83px;
+  left: 7px;
+}
+
+.haha-nose {
+  width: 40px;
+  height: 40px;
+  background-color: #4D272A;
+  border-radius: 8px;
+  margin-bottom: 2em;
+}
+
+.haha-text {
+  background-color: #FF375F;
+  color: #FDD835;
+  font-family: 'Kaiti SC' , serif;
+  font-size: 2em;
+  margin-bottom: 3em;
+  letter-spacing: 0.1em;
+  padding: 10px;
+  line-height: 1.1em;
+}
+
+.haha-tie-rect {
+  width: 90px;
+  height: 90px;
+  motion-rotation: 90deg;
+  background-color: #C9001D;
+  margin-bottom: 2em;
+}
+
+.haha-tie-rect2 {
+  width: 90px;
+  height: 300px;
+  motion-rotation: 90deg;
+  background-color: #C9001D;
+  margin-bottom: 2em;
+}
+
+.haha-jaw {
+  width: 200px;
+  height: 100px;
+  background-color: #966F72;
+  border-radius: 30px;
+  margin-bottom: 2em;
+}
+
+.haha-collar {
+  width: 200px;
+  height: 200px;
+  background-color: rgb(241, 233, 231);
+  margin-bottom: 2em;
+}
+
+.haha-jaw {
+  width: 200px;
+  height: 100px;
+  background-color: #966F72;
+  border-radius: 30px;
+  margin-bottom: 2em;
+}

@@ -48,3 +48,54 @@ export function removeItemFromCart(itemID) {
   return false;
 }
 
+export function isItemInOrder(orderInfo) {
+  let isItemInOrderTrue = false;
+  if (localStorage.orderItems) {
+    const orderItems = JSON.parse(localStorage.orderItems);
+    orderItems.map((cartItem) => {
+      if (cartItem.id === orderInfo.id) {
+        isItemInOrderTrue = true;
+      }
+    });
+  }
+  return isItemInOrderTrue;
+}
+
+export function addCartItemToOrder(orderInfo) {
+  if (localStorage && !localStorage.orderItems) {
+    localStorage.setItem('orderItems', JSON.stringify([]));
+  }
+  if (!isItemInOrder(orderInfo)) {
+    const orderItems = JSON.parse(localStorage.orderItems);
+    orderItems.push(orderInfo);
+    localStorage.setItem('orderItems', JSON.stringify(orderItems));
+    console.log('Added item successfully:', orderInfo);
+    return true;
+  }
+  return false;
+}
+
+export function removeItemFromOrder(orderInfo) {
+  removeItemFromCart(orderInfo.id);
+  if (localStorage && !localStorage.orderItems) {
+    localStorage.setItem('orderItems', JSON.stringify([]));
+  }
+  if (isItemInOrder(orderInfo)) {
+    const orderItems = JSON.parse(localStorage.orderItems);
+    const orderItemsAfterDeletion = orderItems.filter((orderItem) => {
+      return orderItem.id !== orderInfo.id;
+    });
+    localStorage.setItem('orderItems', JSON.stringify(orderItemsAfterDeletion));
+    console.log('deleted item:', orderInfo);
+    return true;
+  }
+  return false;
+}
+
+export function updateOrderItems(orderInfo) {
+  if (localStorage && !localStorage.orderItems) {
+    localStorage.setItem('orderItems', JSON.stringify([]));
+  }
+  removeItemFromOrder(orderInfo);
+  return addCartItemToOrder(orderInfo) && addItemToCart(orderInfo.id);
+}

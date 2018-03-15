@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Select from 'react-select';
+import './StyledSelect.scss';
 
 class StyledSelect extends Component {
   constructor(props) {
@@ -43,12 +44,12 @@ class StyledSelect extends Component {
   render() {
     let options = this.props.options;
     return (
-      <div className='StyledSelect-container'>
-        <div className="StyledSelect-title">{this.props.title?this.props.title:null}</div>
+      <div className="StyledSelect-container">
+        <div className="StyledSelect-title">{this.props.title ? this.props.title : null}</div>
         <Select
           simpleValue
           multi={false}
-          placeholder={this.props.placeholder?this.props.placeholder:null}
+          placeholder={this.props.placeholder ? this.props.placeholder : null}
           value={this.state.optionValue}
           options={options}
           onChange={this.handleSelectChange}

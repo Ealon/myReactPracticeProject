@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import ItemPreview from '../../../components/ItemPreview';
+import Button from '../../../components/Button';
+import Haha from '../components/Haha';
 
 class Home extends Component {
   // componentWillMount() {
@@ -58,6 +60,11 @@ class Home extends Component {
   //   })
   // }
 
+  resetCart = () => {
+    localStorage.setItem('cartItems', JSON.stringify([]));
+    localStorage.setItem('orderItems', JSON.stringify([]));
+  }
+
   render() {
     return (
       <div className="Home">
@@ -69,6 +76,8 @@ class Home extends Component {
           item_image="https://s3-ap-southeast-2.amazonaws.com/wc-prod-pim/JPEG_1000x1000/IP7P128SG_iphone_7_plus_128gb_black.jpg"
           item_name="iPhone"
         />
+        <Button func={this.resetCart}>RESET CART</Button>
+        <Haha />
       </div>
     );
   }

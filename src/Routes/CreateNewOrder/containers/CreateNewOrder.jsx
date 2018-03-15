@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import injectSheet from 'react-jss';
 import axios from 'axios';
 import Select from 'react-select';
-import TextInput from '../../../containers/TextInput';
 import ButtonLink from '../../../components/ButtonLink';
 import Button from '../../../components/Button';
 import CircleLoader from '../../../components/CircleLoader';
@@ -10,20 +9,18 @@ import { blue500 } from '../../../global/colors';
 import { SERVER_PATH, PRODUCT_IMG_DIR } from '../../../global/const';
 import styles from './styles';
 import '../../../../node_modules/react-select/dist/react-select.css';
+import CartItem from './CartItem';
+import CustomerInfo from './CustomerInfo';
+import TextInput from '../../../containers/TextInput';
 
 class CreateNewOrder extends Component {
   constructor(props) {
     super(props);
     this.state = {
       fetching: false,
-      productName: '',
-      chineseName: '',
-      pinyin: '',
-      price: '',
-      supplier: '',
-      url: '',
-      products: [],
-      selectedOption: [],
+      exchangeRate: 5,
+      customers: [],
+      selectedOption: null,
     };
   }
 
@@ -31,11 +28,11 @@ class CreateNewOrder extends Component {
   /* eslint-disable prefer-arrow-callback */
   componentWillMount() {
     const self = this;
-    axios.get(`${SERVER_PATH}/products`)
+    axios.get(`${SERVER_PATH}/customers`)
       .then(function (response) {
         console.log(response);
         if (response.data.status === 'success') {
-          self.setState({ products: response.data.products });
+          self.setState({ customers: response.data.customers });
         }
       })
       .catch(function (error) {
@@ -44,15 +41,15 @@ class CreateNewOrder extends Component {
   }
   /* eslint-enable */
 
+  handleSelectChange = (selectedOption) => {
+    this.setState({ selectedOption });
+    console.log(selectedOption);
+  }
+
   handleChange = name => val => {
     this.setState({
       [name]: val,
     });
-  }
-
-  handleSelectChange = (selectedOption) => {
-    this.setState({ selectedOption });
-    console.log(selectedOption);
   }
   
   postNewProduct = () => {
@@ -88,68 +85,50 @@ class CreateNewOrder extends Component {
   }
 
   render() {
-    let options = [];
-    this.state.products.map(product => {
-      options.push({ value: product._id, label: product.chineseName });
-    })
+    const options = [];
+    let selectedCustomer = null;
+    this.state.customers.map((customer) => {
+      options.push({ value: customer._id, label: customer.chineseName });
+      if (this.state.selectedOption && this.state.selectedOption.label === customer.chineseName) {
+        selectedCustomer = customer;
+      }
+    });
+    const cartItems = JSON.parse(localStorage.cartItems);
+    console.log(selectedCustomer);
     return (
       <div style={{ width: '90%', margin: '10px auto' }} >
-        <div style={{ textAlign: 'center', padding: '10px 0 10px 0' }} >
-          Product Information
+        <div style={{ textAlign: 'center', padding: '10px 0' }} >
+          <h3>Order Information</h3>
         </div>
+        <h3>1. Select a customer</h3>
         <Select
-          name="form-select-products"
-          placeholder="Select Products"
+          name="form-select-customer"
+          placeholder="Select a customer"
           value={this.state.selectedOption}
           onChange={this.handleSelectChange}
-          multi
           removeSelected={false}
           options={options}
         />
-        <div className={this.props.classes.flexParent} >
-          <div className={this.props.classes.flexChild} >  
-            <TextInput
-              title="Product Name"
-              placeholder="input something"
-              function={this.handleChange('productName')}
-            />
-          </div>
-          <div className={this.props.classes.flexChild} >
-            <TextInput
-              title="Chinese Name"
-              placeholder=""
-              function={this.handleChange('chineseName')}
-            />
-          </div>
-          <div className={this.props.classes.flexChild} >
-            <TextInput
-              title="Pinyin"
-              placeholder="input something"
-              function={this.handleChange('pinyin')}
-              />
-          </div>
-          <div className={this.props.classes.flexChild} >
-            <TextInput
-              title="Price (AUD)"
-              placeholder="input something"
-              function={this.handleChange('price')}
-              />
-          </div>
-          <div className={this.props.classes.flexChild} >
-            <TextInput
-              title="Supplier"
-              placeholder="input something"
-              function={this.handleChange('supplier')}
-            />
-          </div>
-          <div className={this.props.classes.flexChild} >
-            <TextInput
-              title="Image URL"
-              placeholder="input something"
-              function={this.handleChange('url')}
-            />
-          </div>
-        </div>
+        <h3>2. Input the exchange rate</h3>
+        <TextInput
+          title="Exchange Rate"
+          placeholder="Please input the exchange rate..."
+          function={this.handleChange('exchangeRate')}
+          defaultValue={this.state.exchangeRate}
+        />
+        {
+          selectedCustomer &&
+          <CustomerInfo
+            name={ selectedCustomer.chineseName }
+            phone={ selectedCustomer.phone }
+            address={ selectedCustomer.address }
+          />
+        }
+        {
+          cartItems.map((itemID) => {
+            return <CartItem id={itemID} key={itemID} exchangeRate={this.state.exchangeRate} />
+          })
+        }
         {
           this.state.fetching ?
             <CircleLoader size={24} color={blue500} />
