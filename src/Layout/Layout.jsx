@@ -34,7 +34,7 @@ class Layout extends Component {
           <Route exact path="/customers" component={Customers} />
           <Route path="/products/new" component={CreateNewProduct} />
           <Route path="/customers/new" component={CreateNewCustomer} />
-          <Route path="/orders/new" component={CreateNewOrder} />
+          <Route exact path="/cart" component={CreateNewOrder} />
           <Route path="/products/edit/:id" component={ProductDetail} />
         </div>
       </Router>

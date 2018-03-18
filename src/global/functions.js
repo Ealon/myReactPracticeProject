@@ -10,7 +10,7 @@ export function isItemInCart(itemID) {
   if (localStorage.cartItems) {
     const cartItems = JSON.parse(localStorage.cartItems);
     cartItems.map((cartItem) => {
-      if (cartItem === itemID) {
+      if (cartItem.id === itemID) {
         isItemInCartTrue = true;
       }
     });
@@ -18,84 +18,48 @@ export function isItemInCart(itemID) {
   return isItemInCartTrue;
 }
 
-export function addItemToCart(itemID) {
+export function addItemToCart(itemInfo) {
   if (localStorage && !localStorage.cartItems) {
     localStorage.setItem('cartItems', JSON.stringify([]));
   }
-  if (!isItemInCart(itemID)) {
+  if (!isItemInCart(itemInfo.id)) {
     const cartItems = JSON.parse(localStorage.cartItems);
-    cartItems.push(itemID);
+    cartItems.push(itemInfo);
     localStorage.setItem('cartItems', JSON.stringify(cartItems));
-    console.log('Added item:', itemID);
+    console.log('Added item to cart successfully:', itemInfo);
     return true;
   }
   return false;
 }
 
-export function removeItemFromCart(itemID) {
+export function updateCartItems(itemInfo) {
+  if (localStorage && !localStorage.orderItems) {
+    localStorage.setItem('orderItems', JSON.stringify([]));
+  }
+  removeItemFromCart(itemInfo);
+  return addItemToCart(itemInfo);
+}
+
+export function removeItemFromCart(itemInfo) {
   if (localStorage && !localStorage.cartItems) {
     localStorage.setItem('cartItems', JSON.stringify([]));
   }
-  if (isItemInCart(itemID)) {
+  if (isItemInCart(itemInfo.id)) {
     const cartItems = JSON.parse(localStorage.cartItems);
     const cartItemsAfterDeletion = cartItems.filter((cartItem) => {
-      return cartItem !== itemID;
+      return cartItem.id !== itemInfo.id;
     });
     localStorage.setItem('cartItems', JSON.stringify(cartItemsAfterDeletion));
-    console.log('deleted item:', itemID);
+    console.log('deleted item successfully:', itemInfo);
     return true;
   }
   return false;
 }
 
-export function isItemInOrder(orderInfo) {
-  let isItemInOrderTrue = false;
-  if (localStorage.orderItems) {
-    const orderItems = JSON.parse(localStorage.orderItems);
-    orderItems.map((cartItem) => {
-      if (cartItem.id === orderInfo.id) {
-        isItemInOrderTrue = true;
-      }
-    });
-  }
-  return isItemInOrderTrue;
-}
-
-export function addCartItemToOrder(orderInfo) {
-  if (localStorage && !localStorage.orderItems) {
-    localStorage.setItem('orderItems', JSON.stringify([]));
-  }
-  if (!isItemInOrder(orderInfo)) {
-    const orderItems = JSON.parse(localStorage.orderItems);
-    orderItems.push(orderInfo);
-    localStorage.setItem('orderItems', JSON.stringify(orderItems));
-    console.log('Added item successfully:', orderInfo);
-    return true;
-  }
-  return false;
-}
-
-export function removeItemFromOrder(orderInfo) {
-  removeItemFromCart(orderInfo.id);
-  if (localStorage && !localStorage.orderItems) {
-    localStorage.setItem('orderItems', JSON.stringify([]));
-  }
-  if (isItemInOrder(orderInfo)) {
-    const orderItems = JSON.parse(localStorage.orderItems);
-    const orderItemsAfterDeletion = orderItems.filter((orderItem) => {
-      return orderItem.id !== orderInfo.id;
-    });
-    localStorage.setItem('orderItems', JSON.stringify(orderItemsAfterDeletion));
-    console.log('deleted item:', orderInfo);
-    return true;
-  }
-  return false;
-}
-
-export function updateOrderItems(orderInfo) {
-  if (localStorage && !localStorage.orderItems) {
-    localStorage.setItem('orderItems', JSON.stringify([]));
-  }
-  removeItemFromOrder(orderInfo);
-  return addCartItemToOrder(orderInfo) && addItemToCart(orderInfo.id);
+export function returnItemInfoInCart(itemID) {
+  const cartItems = JSON.parse(localStorage.cartItems);
+  const requestedItem = cartItems.filter((cartItem) => {
+    return cartItem.id === itemID;
+  });
+  return requestedItem;
 }

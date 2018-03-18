@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import TiEdit from 'react-icons/lib/ti/edit';
 import TiShoppingCart from 'react-icons/lib/ti/shopping-cart';
+import FaTrashO from 'react-icons/lib/fa/trash-o';
 import injectSheet from 'react-jss';
 import { Link } from 'react-router-dom';
 import styles from './styles';
@@ -22,7 +23,11 @@ class ProductItem extends Component {
   }
 
   addToCart = () => {
-    if(addItemToCart(this.props.id)) {
+    const itemInfo = {
+      id: this.props.id,
+    };
+
+    if(addItemToCart(itemInfo)) {
       this.setState({
         isItemInCart: true,
       });
@@ -30,7 +35,11 @@ class ProductItem extends Component {
   }
 
   removeFromCart = () => {
-    if(removeItemFromCart(this.props.id)) {
+    const itemInfo = {
+      id: this.props.id,
+    };
+
+    if(removeItemFromCart(itemInfo)) {
       this.setState({
         isItemInCart: false,
       });
@@ -41,12 +50,13 @@ class ProductItem extends Component {
     return (
       <div className={this.props.classes.itemContainer}>
         <div className={this.props.classes.imgContainer}>
-          <img
+          {/* <img
             alt="preview"
             src={this.props.url}
             className={this.props.classes.img}
             onClick={()=>this.props.openModal(this.props.url)}
-          />
+          /> */}
+          <div style={{ backgroundImage: `url(${this.props.url})` }} className={this.props.classes.previewImg}/>
         </div>
         {
           this.state.isItemInCart ?
@@ -55,26 +65,22 @@ class ProductItem extends Component {
           </div>
           : null
         }
-        {/* <div className={this.props.classes.itemContainer}></div> */}
-          <div className={this.props.classes.chineseName}>
-            {this.props.chineseName}
-          </div>
+        <div className={this.props.classes.chineseName}>
+          {this.props.chineseName} | 
+          <Link to={`/products/edit/${this.props.id}`} >
+            <TiEdit size={20} />
+          </Link>
+        </div>
         <div className={this.props.classes.productName}>
           {this.props.productName}
         </div>
         <div>
-          <span className={this.props.classes.cart}>
-            <TiShoppingCart size={20} />
             {
               this.state.isItemInCart ?
-                <span onClick={this.removeFromCart}>REMOVE FROM CART</span>
+                <button onClick={this.removeFromCart} className={this.props.classes.buttonRemove}><FaTrashO size={20} />REMOVE</button>
                 :
-                <span onClick={this.addToCart}>ADD TO CART</span>
+                <button onClick={this.addToCart} className={this.props.classes.buttonAdd}><TiShoppingCart size={20} />ADD</button>
             }
-          </span> | 
-          <Link to={`/products/edit/${this.props.id}`} >
-            <TiEdit size={20} /> EDIT
-          </Link>
         </div>
       </div>
     );

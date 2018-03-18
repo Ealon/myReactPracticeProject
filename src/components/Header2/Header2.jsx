@@ -2,18 +2,19 @@ import React, { Component } from 'react';
 import { Route, Link } from 'react-router-dom';
 import GoThreeBars from 'react-icons/lib/go/three-bars';
 import injectSheet from 'react-jss';
+import TiShoppingCart from 'react-icons/lib/ti/shopping-cart';
 // import './Header.css';
 import styles from './styles';
 import { blue300, white } from '../../global/colors';
 import { smallScreen } from '../../global/screenSize';
 
-const MenuLink = ({ label, to, activeOnlyWhenExact }) => (
+const MenuLink = ({ children, to, activeOnlyWhenExact }) => (
   <Route
     path={to}
     exact={activeOnlyWhenExact}
     children={({ match }) => (
       <Link to={to} className={match ? 'route--active' : ''} >
-        {label}
+        {children}
       </Link>
     )}
   />
@@ -68,10 +69,11 @@ class Header2 extends Component {
         {
           this.state.expandMenu ?
             <nav className={this.props.classes.headerItems}>
-              <MenuLink activeOnlyWhenExact to="/" label="HOME" />
-              <MenuLink to="/products" label="PRODUCTS" />
-              <MenuLink to="/orders" label="ORDERS" />
-              <MenuLink to="/customers" label="customers" />
+              <MenuLink activeOnlyWhenExact to="/">HOME</MenuLink>
+              <MenuLink to="/products">PRODUCTS</MenuLink>
+              <MenuLink to="/orders">orders</MenuLink>
+              <MenuLink to="/customers">customers</MenuLink>
+              <MenuLink to="/cart" label="cart">CART<TiShoppingCart size={18} /></MenuLink>
             </nav>
             : null
         }

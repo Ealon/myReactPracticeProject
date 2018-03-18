@@ -6,12 +6,14 @@ import ButtonLink from '../../../components/ButtonLink';
 import Button from '../../../components/Button';
 import CircleLoader from '../../../components/CircleLoader';
 import { blue500 } from '../../../global/colors';
-import { SERVER_PATH, PRODUCT_IMG_DIR } from '../../../global/const';
+import { SERVER_PATH } from '../../../global/const';
 import styles from './styles';
 import '../../../../node_modules/react-select/dist/react-select.css';
 import CartItem from './CartItem';
 import CustomerInfo from './CustomerInfo';
 import TextInput from '../../../containers/TextInput';
+
+let options = [];
 
 class CreateNewOrder extends Component {
   constructor(props) {
@@ -21,8 +23,17 @@ class CreateNewOrder extends Component {
       exchangeRate: 5,
       customers: [],
       selectedOption: null,
+      reloadCart: false,
+      selectedCustomer: null,
     };
   }
+
+  reloadCart = () => {
+    this.setState({
+      reloadCart: !this.state.reloadCart,
+    });
+  }
+  
 
   /* eslint-disable func-names */
   /* eslint-disable prefer-arrow-callback */
@@ -33,6 +44,9 @@ class CreateNewOrder extends Component {
         console.log(response);
         if (response.data.status === 'success') {
           self.setState({ customers: response.data.customers });
+          response.data.customers.map((customer) => {
+            options.push({ value: customer._id, label: customer.chineseName });
+          });
         }
       })
       .catch(function (error) {
@@ -44,6 +58,16 @@ class CreateNewOrder extends Component {
   handleSelectChange = (selectedOption) => {
     this.setState({ selectedOption });
     console.log(selectedOption);
+    selectedOption === null ? 
+      this.setState({selectedCustomer:null})
+      :
+      this.state.customers.map(customer => {
+        if (customer._id === selectedOption.value) {
+          this.setState({
+            selectedCustomer: customer,
+          });
+        }  
+      })
   }
 
   handleChange = name => val => {
@@ -52,49 +76,38 @@ class CreateNewOrder extends Component {
     });
   }
   
-  postNewProduct = () => {
+  postNewOrder = () => {
     //eslint-disable-next-line
     if (confirm('Are you sure you want to save this product into the database?')) {
       this.setState({ fetching: true });
-      const self = this;
-      const newProductInfo = {
-        productName: this.state.productName,
-        chineseName: this.state.chineseName,
-        pinyin: this.state.pinyin,
-        price: this.state.price,
-        supplier: this.state.supplier,
-        url: PRODUCT_IMG_DIR + this.state.url,
+      const cartItems = JSON.parse(localStorage.cartItems);
+      const newOrderInfo = {
+        customerInfo: this.state.selectedCustomer,
+        cartItems,
+        exchangeRate: this.state.exchangeRate,
       }
 
-      axios.post(`${SERVER_PATH}/CreateNewOrder`,
-        newProductInfo
-      )
-      .then(function (response) {
-        console.log(response);
-        if (response.data.status === 'success') {
-          self.setState({ fetching: false });
-        }
-      })
-      .catch(function (error) {
-        console.log(error);
-        self.setState({ fetching: false });    
-      });
+      console.warn('订单情况：', newOrderInfo);
+      // axios.post(`${SERVER_PATH}/CreateNewOrder`,
+      //   newOrderInfo
+      // )
+      // .then(function (response) {
+      //   console.log(response);
+      //   if (response.data.status === 'success') {
+      //     self.setState({ fetching: false });
+      //   }
+      // })
+      // .catch(function (error) {
+      //   console.log(error);
+      //   self.setState({ fetching: false });    
+      // });
     } else {
       // alert('no');
     }
   }
 
   render() {
-    const options = [];
-    let selectedCustomer = null;
-    this.state.customers.map((customer) => {
-      options.push({ value: customer._id, label: customer.chineseName });
-      if (this.state.selectedOption && this.state.selectedOption.label === customer.chineseName) {
-        selectedCustomer = customer;
-      }
-    });
     const cartItems = JSON.parse(localStorage.cartItems);
-    console.log(selectedCustomer);
     return (
       <div style={{ width: '90%', margin: '10px auto' }} >
         <div style={{ textAlign: 'center', padding: '10px 0' }} >
@@ -109,6 +122,14 @@ class CreateNewOrder extends Component {
           removeSelected={false}
           options={options}
         />
+        {
+          this.state.selectedCustomer &&
+          <CustomerInfo
+            name={ this.state.selectedCustomer.chineseName }
+            phone={ this.state.selectedCustomer.phone }
+            address={ this.state.selectedCustomer.address }
+          />
+        }
         <h3>2. Input the exchange rate</h3>
         <TextInput
           title="Exchange Rate"
@@ -117,25 +138,17 @@ class CreateNewOrder extends Component {
           defaultValue={this.state.exchangeRate}
         />
         {
-          selectedCustomer &&
-          <CustomerInfo
-            name={ selectedCustomer.chineseName }
-            phone={ selectedCustomer.phone }
-            address={ selectedCustomer.address }
-          />
-        }
-        {
           cartItems.map((itemID) => {
-            return <CartItem id={itemID} key={itemID} exchangeRate={this.state.exchangeRate} />
+            return <CartItem id={itemID.id} key={itemID.id} exchangeRate={this.state.exchangeRate} reloadCart={this.reloadCart} />
           })
         }
         {
           this.state.fetching ?
-            <CircleLoader size={24} color={blue500} />
+            <div><CircleLoader size={24} color={blue500} /></div>
             : null
         }
         <div style={{ textAlign: 'center' }}>
-          <Button func={this.postNewProduct}>create</Button>
+          <Button func={this.postNewOrder}>create</Button>
           <ButtonLink link="/orders">cancel</ButtonLink>
         </div>
       </div>

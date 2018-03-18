@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import injectSheet from 'react-jss';
 import FaTrashO from 'react-icons/lib/fa/trash-o';
+import FaFloppyO from 'react-icons/lib/fa/floppy-o';
 import TextInput from '../../../containers/TextInput';
-// import Button from '../../../components/Button';
 import styles from './styles';
 import { SERVER_PATH } from '../../../global/const';
-import { isItemInOrder, updateOrderItems, removeItemFromOrder } from '../../../global/functions';
+import { updateCartItems, removeItemFromCart, returnItemInfoInCart } from '../../../global/functions';
 
 class CartItem extends Component {
   constructor(props) {
@@ -23,27 +23,40 @@ class CartItem extends Component {
 
   componentWillMount() {
     const { id, exchangeRate } = this.props;
-    const self = this;
-    axios.post(
-      `${SERVER_PATH}/product`,
-      { id },
-    )
-      .then(function (response) {
-        console.log(response);
-        if (response.data.status === 'success') {
-          self.setState({
-            url: response.data.productInfo.url,
-            chineseName: response.data.productInfo.chineseName,
-            price: response.data.productInfo.price,
-            salePrice: response.data.productInfo.price*exchangeRate+35,
-            supplier: response.data.productInfo.supplier,
-          });
-        }
-      })
-      .catch(function (error) {
-        console.log(error);
-        // self.setState({ fetching: false });    
+    const self = this;    
+    const itemInfo = returnItemInfoInCart(id)[0];
+    if (itemInfo.chineseName) {
+      this.setState({
+        ...itemInfo,
       });
+    } else {
+      axios.post(
+        `${SERVER_PATH}/product`,
+        { id },
+      )
+        .then(function (response) {
+          console.log(response);
+          if (response.data.status === 'success') {
+            self.setState({
+              url: response.data.productInfo.url,
+              chineseName: response.data.productInfo.chineseName,
+              price: response.data.productInfo.price,
+              salePrice: response.data.productInfo.price*exchangeRate+35,
+              supplier: response.data.productInfo.supplier,
+            });
+            const itemInfo = {
+              id,
+              salePrice: response.data.productInfo.price*exchangeRate+35,
+              ...response.data.productInfo,
+            };
+            updateCartItems(itemInfo);
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+          // self.setState({ fetching: false });    
+        });
+    }
   }
 
   handleChange = name => val => {
@@ -58,7 +71,7 @@ class CartItem extends Component {
       ...this.state,
     };
     console.log(itemInfo);
-    if (updateOrderItems(itemInfo)) {
+    if (updateCartItems(itemInfo)) {
       alert('sucess!');
     } else {
       alert('failed!')
@@ -66,11 +79,15 @@ class CartItem extends Component {
   }
 
   onRemoveItemInfo = () => {
-    const itemInfo = {
-      id: this.props.id,
-      ...this.state,
-    };
-    removeItemFromOrder(itemInfo) ? alert('删除成功') : alert('删除失败');
+    if (window.confirm(`Remove ${this.state.chineseName} ?`)) {
+      const itemInfo = {
+        id: this.props.id,
+        ...this.state,
+      };
+      removeItemFromCart(itemInfo) ? this.props.reloadCart() : alert('删除失败');
+    } else {
+      
+    }
   }
 
   render() {
@@ -81,8 +98,9 @@ class CartItem extends Component {
     return chineseName && (
       <div className={this.props.classes.flexParent} style={{ paddingTop: '30px', borderBottom: '1px solid #333' }} >
         <div className={this.props.classes.flexChild} >
-          <img src={url} alt="cart-item" className={this.props.classes.previewImg}/>
-          <p>{ chineseName }</p>
+          {/* <img src={url} alt="cart-item" className={this.props.classes.previewImg}/> */}
+          <div style={{ backgroundImage: `url(${url})` }} className={this.props.classes.img}/>
+          <p style={{ textAlign: 'center', fontWeight: 'bold', letterSpacing: 1 }}>{ chineseName }</p>
         </div>
         <div className={this.props.classes.flexChild} >
           <TextInput
@@ -111,14 +129,17 @@ class CartItem extends Component {
             function={this.handleChange('supplier')}
             defaultValue={supplier}
           />
+          <button onClick={this.onSaveItemInfoToOrder} className={this.props.classes.buttonSave} >
+            <FaFloppyO size={20} /> SAVE
+          </button>
+          |
+          <button onClick={this.onRemoveItemInfo} className={this.props.classes.buttonRemove} >
+            <FaTrashO size={20} /> REMOVE
+          </button>
         </div>
         <div className={this.props.classes.summary} >
           <h4>Profit (CNY ¥): { profit } </h4>
           <h4>Profit Rate: { profitRate }% </h4>
-          <button onClick={this.onSaveItemInfoToOrder}>SAVE</button>
-          <button onClick={this.onRemoveItemInfo}>
-            <FaTrashO size={20} /> Remove from cart
-          </button>
         </div>
       </div>
     );
